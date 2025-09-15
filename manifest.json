@@ -1,0 +1,21 @@
+{
+  "name": "পদার্থবিজ্ঞান ওয়েবসাইট",
+  "short_name": "Physics App",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://i.imgur.com/NeAjw33.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://i.imgur.com/zJYCW2q.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
