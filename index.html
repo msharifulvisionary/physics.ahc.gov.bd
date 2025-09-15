@@ -6514,11 +6514,11 @@ ahcollege@gmail.com</p>
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
       navigator.serviceWorker.register("/sw.js")
-        .then(reg => console.log("Service Worker Registered", reg))
-        .catch(err => console.log("Service Worker Failed", err));
+        .then(reg => console.log("Service Worker registered:", reg.scope))
+        .catch(err => console.log("Service Worker failed:", err));
     });
   }
-</script> 
+</script>
 
       
           
