@@ -5,8 +5,8 @@ self.addEventListener('install', (event) => {
         './',
         './index.html',
         './manifest.json',
-        'https://i.imgur.com/bLsJS9s.png',
-        'https://i.imgur.com/oSvcwIl.png'
+        'image512.png',
+        'image192.png'
       ]);
     })
   );
