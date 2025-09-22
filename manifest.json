@@ -1,6 +1,6 @@
 {
-  "name": "পদার্থবিজ্ঞান ওয়েবসাইট",
-  "short_name": "Physics App",
+  "name": "AHC PHYSICS WEB APP",
+  "short_name": "PHYSICS APP",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -8,14 +8,14 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "https://i.imgur.com/NeAjw33.jpeg",
+      "src": "https://i.imgur.com/bLsJS9s.png",
       "sizes": "192x192",
-      "type": "image/jpeg"
+      "type": "image/png"
     },
     {
-      "src": "https://i.imgur.com/zJYCW2q.jpeg",
+      "src": "https://i.imgur.com/oSvcwIl.png",
       "sizes": "512x512",
-      "type": "image/jpeg"
+      "type": "image/png"
     }
   ]
 }
