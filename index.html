@@ -4838,6 +4838,13 @@
     z-index: 9999;
     font-family: 'Arial', sans-serif;
   }
+      #welcome-text .letter {
+  display: inline-block;
+  font-size: 2.5rem;
+  color: #e84393;
+  letter-spacing: 0.05em;
+}
+
   
   .welcome-content {
     text-align: center;
@@ -5298,7 +5305,7 @@
   <!-- Welcome Overlay with Flowers -->
 <div id="welcome-overlay">
   <div class="welcome-content">
-    <h1 class="welcome-title">স্বাগতম!</h1>
+    <h1 class="welcome-title" id="welcome-text">WELCOME</h1>
     <p class="welcome-message">আমাদের ওয়েবসাইটে আসার জন্য ধন্যবাদ</p>
     <button id="close-welcome" class="close-btn">ওয়েবসাইট দেখুন</button>
   </div>
@@ -6864,10 +6871,11 @@ ahcollege@gmail.com</p>
 </script>       
 
       <!-- welcome -->
-  <script>
+<script>
   document.addEventListener('DOMContentLoaded', function() {
     const overlay = document.getElementById('welcome-overlay');
     const closeButton = document.getElementById('close-welcome');
+    const welcomeText = document.getElementById("welcome-text");
     
     // Array of flower emojis
     const flowers = ['🌸', '🌹', '🌺', '🌻', '🌼', '🌷', '💐', '🥀', '🪷'];
@@ -6931,7 +6939,38 @@ ahcollege@gmail.com</p>
     closeButton.addEventListener('click', closeOverlay);
     
     // Optional: Close after 10 seconds automatically
-    setTimeout(closeOverlay, 5000);
+    setTimeout(closeOverlay, 50000);
+
+    // -----------------------------
+    // টেক্সট অ্যানিমেশন অংশ
+    // -----------------------------
+    const text = welcomeText.textContent;
+    welcomeText.innerHTML = text
+      .split("")
+      .map(char => `<span class="letter">${char}</span>`)
+      .join("");
+
+    // anime.js animation
+    anime.timeline({ loop: true })
+      .add({
+        targets: "#welcome-text .letter",
+        translateY: [
+          { value: -40, duration: 600, easing: "easeOutExpo" },
+          { value: 0, duration: 800, easing: "easeOutBounce" }
+        ],
+        rotate: {
+          value: "1turn",
+          easing: "easeInOutSine"
+        },
+        delay: anime.stagger(100), // প্রতিটি অক্ষর একটু করে দেরিতে আসবে
+      })
+      .add({
+        targets: "#welcome-text",
+        opacity: 0,
+        duration: 1000,
+        easing: "easeOutExpo",
+        delay: 1000
+      });
   });
 </script>
   
