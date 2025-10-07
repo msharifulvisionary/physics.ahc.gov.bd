@@ -1,7 +1,7 @@
 // ========================
 // ✅ CACHE SETUP
 // ========================
-const CACHE_NAME = "physics-web-cache-v6"; // ← প্রতিবার update দিলে version নাম পরিবর্তন করো
+const CACHE_NAME = "physics-web-cache-v8"; // ← প্রতিবার update দিলে version নাম পরিবর্তন করো
 const urlsToCache = [
   "./",
   "./index.html",
