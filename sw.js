@@ -1,4 +1,7 @@
-const CACHE_NAME = "physics-web-cache-v5";
+// ========================
+// ✅ CACHE SETUP
+// ========================
+const CACHE_NAME = "physics-web-cache-v6"; // ← প্রতিবার update দিলে version নাম পরিবর্তন করো
 const urlsToCache = [
   "./",
   "./index.html",
@@ -16,7 +19,9 @@ const urlsToCache = [
 // Dynamic Cache Name for API calls or external resources
 const DYNAMIC_CACHE = "physics-dynamic-cache-v1";
 
-// Install Event
+// ========================
+// ✅ INSTALL EVENT
+// ========================
 self.addEventListener("install", (event) => {
   console.log("✅ Service Worker Installing...");
   event.waitUntil(
@@ -32,7 +37,9 @@ self.addEventListener("install", (event) => {
   );
 });
 
-// Activate Event
+// ========================
+// ✅ ACTIVATE EVENT
+// ========================
 self.addEventListener("activate", (event) => {
   console.log("✅ Service Worker Activated");
   event.waitUntil(
@@ -52,7 +59,9 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Fetch Event - Improved Cache Strategy
+// ========================
+// ✅ FETCH EVENT
+// ========================
 self.addEventListener("fetch", (event) => {
   // Skip non-GET requests
   if (event.request.method !== "GET") return;
@@ -67,7 +76,9 @@ self.addEventListener("fetch", (event) => {
   }
 });
 
-// Cache First Strategy for static assets
+// ========================
+// ✅ CACHE FIRST STRATEGY
+// ========================
 async function cacheFirstStrategy(request) {
   const cachedResponse = await caches.match(request);
   
@@ -94,7 +105,7 @@ async function cacheFirstStrategy(request) {
       return caches.match("./index.html");
     }
     
-    // For other file types, you can return a fallback
+    // For other file types, fallback text
     return new Response("Offline content not available", {
       status: 408,
       headers: { "Content-Type": "text/plain" }
@@ -102,7 +113,9 @@ async function cacheFirstStrategy(request) {
   }
 }
 
-// Network First Strategy for API calls
+// ========================
+// ✅ NETWORK FIRST STRATEGY (for APIs)
+// ========================
 async function networkFirstStrategy(request) {
   try {
     const networkResponse = await fetch(request);
@@ -133,7 +146,9 @@ async function networkFirstStrategy(request) {
   }
 }
 
-// Background Sync for offline actions
+// ========================
+// ✅ BACKGROUND SYNC EVENT
+// ========================
 self.addEventListener("sync", (event) => {
   if (event.tag === "background-sync") {
     console.log("🔄 Background sync triggered");
@@ -145,3 +160,28 @@ async function doBackgroundSync() {
   // Implement your background sync logic here
   console.log("🔄 Performing background sync");
 }
+
+// ========================
+// ✅ UPDATE SYSTEM SUPPORT
+// ========================
+
+// 👉 এই অংশটা নতুনভাবে যুক্ত করা হয়েছে
+
+// Service worker থেকে মেসেজ শোনা (update trigger)
+self.addEventListener("message", (event) => {
+  if (event.data === "skipWaiting") {
+    console.log("⚡ Force activating new service worker...");
+    self.skipWaiting();
+  }
+});
+
+// যখন নতুন SW সক্রিয় হবে তখন ইউজারদের জানানো
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    self.clients.matchAll({ type: "window" }).then((clients) => {
+      for (const client of clients) {
+        client.postMessage({ type: "NEW_VERSION_READY" });
+      }
+    })
+  );
+});
