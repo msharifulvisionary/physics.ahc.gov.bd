@@ -1,4 +1,4 @@
-const CACHE_NAME = "physics-ahc-cache-v10";
+const CACHE_NAME = "physics-ahc-cache-v1";
 const urlsToCache = [
   "/physics.ahc.gov.bd/index.html",
   "/physics.ahc.gov.bd/style.css",
