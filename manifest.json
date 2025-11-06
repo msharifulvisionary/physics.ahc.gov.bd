@@ -1,6 +1,6 @@
 {
-  "name": "Physics AHC",
-  "short_name": "PhysicsAHC",
+  "name": "AHC PHYSICS WEB APP",
+  "short_name": "AHC PHYSICS APP",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
