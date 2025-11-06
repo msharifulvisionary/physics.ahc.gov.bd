@@ -7379,259 +7379,89 @@
 </style>
 
 <!-- app install notification -->
-    <style>
-        /* Install Prompt Styles */
-        .install-prompt {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 16px;
-            padding: 4px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            z-index: 10000;
-            max-width: 320px;
-            animation: slideIn 0.5s ease-out;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
+  <style>
+    /* AHC Install Prompt Styles */
+    .ahcinstall-container {
+      display: none;
+      justify-content: center;
+      position: fixed;
+      top: 120px;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+    }
 
-        .install-container {
-            background: white;
-            border-radius: 14px;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-        }
+    .ahcinstall-box {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 16px;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.15);
+      padding: 10px 16px;
+      max-width: 440px;
+      width: 90%;
+      animation: slideDown 0.6s ease;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
 
-        .install-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-        }
+    .ahcinstall-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      margin-right: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
 
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
+    .ahcinstall-text h3 {
+      margin: 0;
+      font-size: 17px;
+      color: #111;
+      font-weight: 600;
+    }
 
-        /* Header Styles */
-        .install-header {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 16px;
-            gap: 12px;
-        }
+    .ahcinstall-text p {
+      margin: 2px 0 0;
+      font-size: 13px;
+      color: #444;
+    }
 
-        .app-icon {
-            flex-shrink: 0;
-        }
+    .ahcinstall-buttons {
+      margin-left: auto;
+      display: flex;
+      gap: 8px;
+    }
 
-        .app-icon img {
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
+    #ahcinstallButton {
+      background: linear-gradient(135deg, #0078ff, #00aaff);
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.3s;
+    }
 
-        .app-info {
-            flex: 1;
-        }
+    #ahcinstallButton:hover {
+      background: linear-gradient(135deg, #005ed1, #0088ff);
+    }
 
-        .app-name {
-            margin: 0 0 4px 0;
-            font-size: 16px;
-            font-weight: 700;
-            color: #1f2937;
-        }
+    #ahccloseButton {
+      background: transparent;
+      color: #555;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      font-weight: bold;
+    }
 
-        .app-desc {
-            margin: 0;
-            font-size: 13px;
-            color: #6b7280;
-        }
-
-        .close-btn {
-            background: #f3f4f6;
-            border: none;
-            border-radius: 8px;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #6b7280;
-            transition: all 0.2s ease;
-            flex-shrink: 0;
-        }
-
-        .close-btn:hover {
-            background: #e5e7eb;
-            color: #374151;
-        }
-
-        /* Features List */
-        .features-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding: 16px;
-            background: #f8fafc;
-            border-radius: 12px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            color: #4b5563;
-            font-weight: 500;
-        }
-
-        .feature-icon {
-            font-size: 14px;
-        }
-
-        /* Install Actions */
-        .install-actions {
-            text-align: center;
-        }
-
-        .install-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            margin-bottom: 8px;
-        }
-
-        .install-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-        }
-
-        .install-btn:active {
-            transform: translateY(0);
-        }
-
-        .install-note {
-            margin: 0;
-            font-size: 12px;
-            color: #9ca3af;
-            font-weight: 500;
-        }
-
-        /* Offline Status */
-        .offline-status {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: #ef4444;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            z-index: 9999;
-            font-weight: bold;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .offline-close-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: white;
-            font-size: 14px;
-            transition: all 0.2s ease;
-        }
-
-        .offline-close-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 480px) {
-            .install-prompt {
-                top: 10px;
-                right: 10px;
-                left: 10px;
-                max-width: none;
-            }
-            
-            .features-list {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-
-            .offline-status {
-                padding: 8px;
-                font-size: 14px;
-            }
-        }
-
-        /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
-            .install-container {
-                background: #1f2937;
-            }
-            
-            .app-name {
-                color: #f9fafb;
-            }
-            
-            .app-desc {
-                color: #d1d5db;
-            }
-            
-            .close-btn {
-                background: #374151;
-                color: #9ca3af;
-            }
-            
-            .close-btn:hover {
-                background: #4b5563;
-                color: #d1d5db;
-            }
-            
-            .features-list {
-                background: #111827;
-            }
-            
-            .feature-item {
-                color: #e5e7eb;
-            }
-        }
-    </style>
+    @keyframes slideDown {
+      from { transform: translateY(-60px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
 
 <!-- print system added-->
 <style>
@@ -11016,58 +10846,20 @@
   <!-- Flowers will be generated by JavaScript -->
 </div>
 
-    <!-- Install Prompt Notification -->
-    <div id="installPrompt" class="install-prompt" style="display: none;">
-        <div class="install-container">
-            <!-- Header -->
-            <div class="install-header">
-                <div class="app-icon">
-                    <img src="https://i.imgur.com/nIOAmb3.png" alt="App Icon" width="40" height="40">
-                </div>
-                <div class="app-info">
-                    <h3 class="app-name">AHC PHYSICS APP</h3>
-                    <p class="app-desc">Install for better experience</p>
-                </div>
-                <button id="closePrompt" class="close-btn">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path d="M13 1L1 13M1 1L13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Features List -->
-            <div class="features-list">
-                <div class="feature-item">
-                    <span class="feature-icon">🚀</span>
-                    <span>Fast loading</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">📱</span>
-                    <span>App-like experience</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">🔍</span>
-                    <span>Quick access</span>
-                </div>
-                <div class="feature-item">
-                    <span class="feature-icon">⚡</span>
-                    <span>Works offline</span>
-                </div>
-            </div>
-
-            <!-- Install Button -->
-            <div class="install-actions">
-                <button id="installButton" class="install-btn">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
-                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-                    </svg>
-                    Install App
-                </button>
-                <p class="install-note">No download required • Free</p>
-            </div>
-        </div>
+  <!-- Install Prompt UI -->
+  <div id="ahcinstallPrompt" class="ahcinstall-container">
+    <div class="ahcinstall-box">
+      <img src="https://i.imgur.com/nIOAmb3.png" alt="App Icon" class="ahcinstall-icon">
+      <div class="ahcinstall-text">
+        <h3>Install AHC PHYSICS APP</h3>
+        <p>Use it like an app — works offline too!</p>
+      </div>
+      <div class="ahcinstall-buttons">
+        <button id="ahcinstallButton">Install</button>
+        <button id="ahccloseButton">✖</button>
+      </div>
     </div>
-
+  </div>
 
     <!-- exam countdown -->
     
@@ -15636,121 +15428,75 @@ ahcollege@gmail.com</p>
 
       
 <!-- Register Service Worker + Install Button -->
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./service-worker.js')
-    .then(() => console.log('✅ Service Worker registered'))
-    .catch(err => console.log('❌ Service Worker failed:', err));
-}
-
-// Install prompt
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-
-  const btn = document.createElement('button');
-  btn.textContent = '📲 Install App';
-  btn.style.position = 'fixed';
-  btn.style.bottom = '20px';
-  btn.style.right = '20px';
-  btn.style.padding = '10px 15px';
-  btn.style.background = '#1a73e8';
-  btn.style.color = '#fff';
-  btn.style.border = 'none';
-  btn.style.borderRadius = '8px';
-  btn.style.boxShadow = '0 2px 6px rgba(0,0,0,0.2)';
-  btn.style.cursor = 'pointer';
-  btn.style.zIndex = '9999';
-  document.body.appendChild(btn);
-
-  btn.addEventListener('click', async () => {
-    btn.remove();
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(outcome === 'accepted' ? '✅ Installed' : '❌ Dismissed');
-    deferredPrompt = null;
-  });
-});
-
-window.addEventListener('appinstalled', () => {
-  console.log('📱 App installed successfully');
-});
-</script>
-
-<!-- Install Prompt Logic Only -->
-<script>
-let deferredPrompt;
-const installPrompt = document.getElementById('installPrompt');
-const installButton = document.getElementById('installButton');
-const closeButton = document.getElementById('closePrompt');
-
-// Listen for the beforeinstallprompt event
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-
-  // Show the install prompt after a short delay
-  setTimeout(() => {
-    showInstallPrompt();
-  }, 4000);
-});
-
-function showInstallPrompt() {
-  if (deferredPrompt && installPrompt) {
-    installPrompt.style.display = 'block';
-  }
-}
-
-// Handle install button click
-if (installButton) {
-  installButton.addEventListener('click', async () => {
-    if (!deferredPrompt) return;
-
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-
-    if (outcome === 'accepted') {
-      console.log('✅ User accepted the install prompt');
-      if (installPrompt) installPrompt.style.display = 'none';
-    } else {
-      console.log('❌ User dismissed the install prompt');
+  <script>
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('✅ Service Worker Registered'))
+        .catch(err => console.log('❌ SW Error:', err));
     }
 
-    deferredPrompt = null;
-  });
-}
+    // Install Prompt Logic
+    let deferredPrompt;
+    const ahcInstallPrompt = document.getElementById('ahcinstallPrompt');
+    const ahcInstallButton = document.getElementById('ahcinstallButton');
+    const ahcCloseButton = document.getElementById('ahccloseButton');
 
-// Handle close button click
-if (closeButton) {
-  closeButton.addEventListener('click', () => {
-    if (installPrompt) {
-      installPrompt.style.display = 'none';
-    }
-  });
-}
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      setTimeout(() => {
+        ahcInstallPrompt.style.display = 'flex';
+      }, 1000);
+    });
 
-// Handle app installed event
-window.addEventListener('appinstalled', () => {
-  console.log('📱 App installed successfully');
-  if (installPrompt) installPrompt.style.display = 'none';
-  deferredPrompt = null;
-  localStorage.setItem('appInstalled', 'true');
-});
+    ahcInstallButton.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        console.log('✅ App installed');
+        ahcInstallPrompt.style.display = 'none';
+      } else {
+        console.log('❌ Install dismissed');
+      }
+      deferredPrompt = null;
+    });
 
-// Check if running in standalone mode
-if (window.matchMedia('(display-mode: standalone)').matches) {
-  console.log('📱 App running in standalone mode');
-  localStorage.setItem('appInstalled', 'true');
-  if (installPrompt) installPrompt.style.display = 'none';
-}
+    ahcCloseButton.addEventListener('click', () => {
+      ahcInstallPrompt.style.display = 'none';
+    });
 
-// Hide prompt if app already installed
-if (localStorage.getItem('appInstalled') === 'true') {
-  console.log('📱 App was previously installed');
-  if (installPrompt) installPrompt.style.display = 'none';
-}
-</script>
+    window.addEventListener('appinstalled', () => {
+      console.log('📱 PWA installed');
+      ahcInstallPrompt.style.display = 'none';
+    });
+  </script>
+
+  <!-- Inline service worker registration -->
+  <script id="service-worker-script" type="text/plain">
+    const CACHE_NAME = 'physics-ahc-v1';
+    const urlsToCache = [
+      '/',
+      '/index.html',
+      '/image192.png',
+      '/image512.png'
+    ];
+
+    self.addEventListener('install', (event) => {
+      event.waitUntil(
+        caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
+      );
+    });
+
+    self.addEventListener('fetch', (event) => {
+      event.respondWith(
+        caches.match(event.request).then((response) =>
+          response || fetch(event.request)
+        )
+      );
+    });
+  </script>
       <!-- welcome -->
 
 <script>
