@@ -1,6 +1,6 @@
 // service-worker.js
 
-const CACHE_NAME = "physics-ahc-cache-v4";
+const CACHE_NAME = "physics-ahc-cache-v6";
 const urlsToCache = [
   "./",
   "./index.html",
